@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if -z $1 ; then
+if [ -z "$1" ] ; then
   echo cluster folder as first argument required
   echo example ./fetch-schemas.sh api-staging
   exit 1
