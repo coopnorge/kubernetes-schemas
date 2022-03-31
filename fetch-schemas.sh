@@ -6,9 +6,9 @@ if [ -z "$1" ] ; then
   exit 1
 fi
 
-SCHEMA_DIR=/master-standalone-strict
-
-WORKDIR=${1}/${SCHEMA_DIR}
+SCHEMA_FETCH_SCRIPT=${PWD}/openapi2jsonschema.py
+WORKDIR=${1}
+export FILENAME_FORMAT='{kind}-{group}-{version}'
 
 ISTIO_VERSION=1.11.6
 ISTIO_URL=https://raw.githubusercontent.com/istio/istio/${ISTIO_VERSION}/manifests/charts/base/crds/crd-all.gen.yaml
@@ -22,11 +22,7 @@ rm -fr ${WORKDIR}/*
 
 pushd ${WORKDIR}
 
-### ISTIO
-curl $ISTIO_URL | yq eval  - -o json -s '.spec.names.singular + "-" + .spec.group + "-v1beta1"'
-ls *istio.io-v1beta1.json | sed 'p;s/\.istio\.io//' | xargs -n2 mv
+$SCHEMA_FETCH_SCRIPT $ISTIO_URL
+$SCHEMA_FETCH_SCRIPT $EXTERNAL_SECRET_MANAGER_URL
 
-### EXTERNAL_SECRET_MANAGER (OLD)
-curl $EXTERNAL_SECRET_MANAGER_URL | yq eval - -o json > externalsecret-kubernetes-client-v1.json
-
-popd ${SCHEMA_DIR}
+popd
