@@ -9,6 +9,6 @@ metadata:
   annotations:
     github.com/project-slug: coopnorge/kubernetes-schemas
 spec:
-  type: component
+  type: library
   lifecycle: production
   owner: cloud-platform
