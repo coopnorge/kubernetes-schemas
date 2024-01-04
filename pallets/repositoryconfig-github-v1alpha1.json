@@ -1,0 +1,454 @@
+{
+  "properties": {
+    "apiVersion": {
+      "type": "string"
+    },
+    "kind": {
+      "type": "string"
+    },
+    "metadata": {
+      "type": "object"
+    },
+    "spec": {
+      "properties": {
+        "archiveOnDestroy": {
+          "default": true,
+          "description": "Specifies if the repository should be archived when destroyed. Defaults to true",
+          "type": "boolean"
+        },
+        "archived": {
+          "default": false,
+          "description": "Specifies if the repository should be archived. NOTE Currently, the API does not support unarchiving. Defaults to false.",
+          "type": "boolean"
+        },
+        "branches": {
+          "description": "Branch settings.",
+          "properties": {
+            "default": {
+              "default": "main",
+              "description": "The name of the default branch of the repository.",
+              "type": "string"
+            },
+            "protection": {
+              "description": "A list of topics for the repository.",
+              "items": {
+                "properties": {
+                  "enforceAdmins": {
+                    "default": true,
+                    "description": "Enforce status checks for repository administrators. Defaults to true.",
+                    "type": "boolean"
+                  },
+                  "id": {
+                    "description": "A identifier for this protection rule. Can only contain alphanumeric characters.",
+                    "type": "string"
+                  },
+                  "pattern": {
+                    "default": "main",
+                    "description": "Identifies the protection rule pattern. Defaults to main.",
+                    "type": "string"
+                  },
+                  "requireConversationResolution": {
+                    "default": true,
+                    "description": "Require all conversations on code must be resolved before a pull request can be merged. Defaults to true.",
+                    "type": "boolean"
+                  },
+                  "requireLinearHistory": {
+                    "default": true,
+                    "description": "Enforces a linear commit Git history. Preventing anyone from pushing merge commits to a branch. Defaults to true",
+                    "type": "boolean"
+                  },
+                  "requireSignedCommits": {
+                    "default": false,
+                    "description": "Require all commits to be signed with GPG. Defaults to false.",
+                    "type": "boolean"
+                  },
+                  "requiredPullRequestReviews": {
+                    "description": "Enforce restrictions for pull request reviews.",
+                    "properties": {
+                      "requireCodeOwnerReviews": {
+                        "default": true,
+                        "description": "Require an approved review in pull requests including files with a designated code owner. Defaults to true.",
+                        "type": "boolean"
+                      },
+                      "requireLastPushApproval": {
+                        "default": false,
+                        "description": "Require that The most recent push must be approved by someone other than the last pusher.  Defaults to false",
+                        "type": "boolean"
+                      },
+                      "requiredApprovingReviewCount": {
+                        "default": 1,
+                        "description": "Required number of approvals to satisfy branch protection requirements. If this is specified it must be a number between 0-6. Defaults to 1.",
+                        "type": "integer"
+                      }
+                    },
+                    "type": "object",
+                    "additionalProperties": false
+                  },
+                  "requiredStatusChecks": {
+                    "description": "Enforce restrictions for required status checks.",
+                    "properties": {
+                      "checks": {
+                        "description": "The list of status checks to require in order to merge into this branch. No status checks are required by default.",
+                        "items": {
+                          "type": "string"
+                        },
+                        "type": "array"
+                      },
+                      "strict": {
+                        "default": true,
+                        "description": "Require branches to be up to date before merging. Defaults to true.",
+                        "type": "boolean"
+                      }
+                    },
+                    "type": "object",
+                    "additionalProperties": false
+                  }
+                },
+                "required": [
+                  "pattern",
+                  "id"
+                ],
+                "type": "object",
+                "additionalProperties": false
+              },
+              "type": "array"
+            }
+          },
+          "type": "object",
+          "additionalProperties": false
+        },
+        "compositeDeletePolicy": {
+          "default": "Background",
+          "enum": [
+            "Background",
+            "Foreground"
+          ],
+          "type": "string"
+        },
+        "compositionRef": {
+          "properties": {
+            "name": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object",
+          "additionalProperties": false
+        },
+        "compositionRevisionRef": {
+          "properties": {
+            "name": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object",
+          "additionalProperties": false
+        },
+        "compositionRevisionSelector": {
+          "properties": {
+            "matchLabels": {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            }
+          },
+          "required": [
+            "matchLabels"
+          ],
+          "type": "object",
+          "additionalProperties": false
+        },
+        "compositionSelector": {
+          "properties": {
+            "matchLabels": {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            }
+          },
+          "required": [
+            "matchLabels"
+          ],
+          "type": "object",
+          "additionalProperties": false
+        },
+        "compositionUpdatePolicy": {
+          "default": "Automatic",
+          "enum": [
+            "Automatic",
+            "Manual"
+          ],
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the Github repository.",
+          "type": "string"
+        },
+        "homepage": {
+          "description": "URL of a page describing the project.",
+          "type": "string"
+        },
+        "issues": {
+          "default": true,
+          "description": "Enable the GitHub Issues features on the repository. Defaults to true.",
+          "type": "boolean"
+        },
+        "pages": {
+          "description": "Settings for Github Pages.",
+          "properties": {
+            "cname": {
+              "description": "The custom domain for the repository. This can only be set after the repository has been created.",
+              "type": "string"
+            },
+            "enabled": {
+              "default": false,
+              "description": "Enable Github Pages. Defaults to false.",
+              "type": "boolean"
+            },
+            "source": {
+              "description": "The source branch and directory for the rendered Pages site.",
+              "properties": {
+                "branch": {
+                  "default": "main",
+                  "description": "Source branch for rendered Pages. Defaults to main.",
+                  "type": "string"
+                },
+                "path": {
+                  "default": "/docs",
+                  "description": "Source path for rendered Pages. Defaults to /docs.",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "branch"
+              ],
+              "type": "object",
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "source"
+          ],
+          "type": "object",
+          "additionalProperties": false
+        },
+        "publishConnectionDetailsTo": {
+          "properties": {
+            "configRef": {
+              "default": {
+                "name": "default"
+              },
+              "properties": {
+                "name": {
+                  "type": "string"
+                }
+              },
+              "type": "object",
+              "additionalProperties": false
+            },
+            "metadata": {
+              "properties": {
+                "annotations": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "type": "object"
+                },
+                "labels": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "type": "object"
+                },
+                "type": {
+                  "type": "string"
+                }
+              },
+              "type": "object",
+              "additionalProperties": false
+            },
+            "name": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object",
+          "additionalProperties": false
+        },
+        "pullRequests": {
+          "description": "Pull Request settings.",
+          "properties": {
+            "allowAutoMerge": {
+              "default": true,
+              "description": "Set to false to disable auto-merging pull requests on the repository. Defaults to true.",
+              "type": "boolean"
+            },
+            "allowMergeCommit": {
+              "default": false,
+              "description": "Set to false to disable merge commits on the repository. Defaults to false.",
+              "type": "boolean"
+            },
+            "allowRebaseMerge": {
+              "default": false,
+              "description": "Set to false to disable rebase merges on the repository. Defaults to false.",
+              "type": "boolean"
+            },
+            "allowSquashMerge": {
+              "default": true,
+              "description": "Set to false to disable squash merges on the repository. Defaults to true.",
+              "type": "boolean"
+            },
+            "allowUpdateBranch": {
+              "default": true,
+              "description": "Set to true to always suggest updating pull request branches. Defaults to true.",
+              "type": "boolean"
+            },
+            "deleteBranchOnMerge": {
+              "default": true,
+              "description": "Automatically delete head branch after a pull request is merged. Defaults to true.",
+              "type": "boolean"
+            },
+            "mergeCommitMessage": {
+              "default": "PR_BODY",
+              "description": "Can be PR_BODY, PR_TITLE, or BLANK for a default merge commit message. Default to PR_BODY.",
+              "type": "string"
+            },
+            "mergeCommitTitle": {
+              "default": "PR_TITLE",
+              "description": "Can be PR_TITLE or MERGE_MESSAGE for a default merge commit title. Defaults to PR_TITLE.",
+              "type": "string"
+            },
+            "squashMergeCommitMessage": {
+              "default": "PR_BODY",
+              "description": "Can be PR_BODY, COMMIT_MESSAGES, or BLANK for a default squash merge commit message. Defaults to PR_BODY.",
+              "type": "string"
+            },
+            "squashMergeCommitTitle": {
+              "default": "PR_TITLE",
+              "description": "Can be PR_TITLE or COMMIT_OR_PR_TITLE for a default squash merge commit title. Defaults to PR_TITLE.",
+              "type": "string"
+            }
+          },
+          "type": "object",
+          "additionalProperties": false
+        },
+        "resourceRef": {
+          "properties": {
+            "apiVersion": {
+              "type": "string"
+            },
+            "kind": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "apiVersion",
+            "kind",
+            "name"
+          ],
+          "type": "object",
+          "additionalProperties": false
+        },
+        "template": {
+          "default": false,
+          "description": "Tell GitHub that this is a template repository. Defaults to false.",
+          "type": "boolean"
+        },
+        "topics": {
+          "description": "A list of topics for the repository.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "visibility": {
+          "default": "internal",
+          "description": "Visibility of the Github repository. One of public, private or internal.",
+          "enum": [
+            "public",
+            "internal"
+          ],
+          "type": "string"
+        },
+        "writeConnectionSecretToRef": {
+          "properties": {
+            "name": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "type": "object",
+          "additionalProperties": false
+        }
+      },
+      "type": "object",
+      "additionalProperties": false
+    },
+    "status": {
+      "properties": {
+        "conditions": {
+          "description": "Conditions of the resource.",
+          "items": {
+            "properties": {
+              "lastTransitionTime": {
+                "format": "date-time",
+                "type": "string"
+              },
+              "message": {
+                "type": "string"
+              },
+              "reason": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "lastTransitionTime",
+              "reason",
+              "status",
+              "type"
+            ],
+            "type": "object",
+            "additionalProperties": false
+          },
+          "type": "array"
+        },
+        "connectionDetails": {
+          "properties": {
+            "lastPublishedTime": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "type": "object",
+          "additionalProperties": false
+        }
+      },
+      "type": "object",
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "spec"
+  ],
+  "type": "object"
+}
