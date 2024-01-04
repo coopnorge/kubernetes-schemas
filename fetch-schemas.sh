@@ -13,8 +13,8 @@ export FILENAME_FORMAT='{kind}-{group}-{version}'
 ISTIO_VERSION=1.11.6
 ISTIO_URL=https://raw.githubusercontent.com/istio/istio/${ISTIO_VERSION}/manifests/charts/base/crds/crd-all.gen.yaml
 
-EXTERNAL_SECRET_MANAGER_VERSION=8.5.5
-EXTERNAL_SECRET_MANAGER_URL=https://raw.githubusercontent.com/external-secrets/kubernetes-external-secrets/${EXTERNAL_SECRET_MANAGER_VERSION}/charts/kubernetes-external-secrets/crds/kubernetes-client.io_externalsecrets_crd.yaml
+EXTERNAL_SECRET_MANAGER_VERSION=v0.9.11
+EXTERNAL_SECRET_MANAGER_URL=https://raw.githubusercontent.com/external-secrets/external-secrets/${EXTERNAL_SECRET_MANAGER_VERSION}/config/crds/bases/external-secrets.io_externalsecrets.yaml
 
 ### SETUP
 mkdir -p ${WORKDIR}

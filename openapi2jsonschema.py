@@ -6,6 +6,9 @@ import json
 import sys
 import os
 import urllib.request
+if 'DISABLE_SSL_CERT_VALIDATION' in os.environ:
+    import ssl
+    ssl._create_default_https_context = ssl._create_unverified_context
 
 def test_additional_properties():
     for test in iter([{
@@ -72,7 +75,7 @@ def allow_null_optional_fields(data, parent=None, grand_parent=None, key=None):
             elif isinstance(v, str):
                 is_non_null_type = k == "type" and v != "null"
                 has_required_fields = grand_parent and "required" in grand_parent
-                if is_non_null_type and not has_required_field:
+                if is_non_null_type and not has_required_fields:
                     new_v = [v, "null"]
             new[k] = new_v
         return new
@@ -106,11 +109,21 @@ def write_schema_file(schema, filename):
     print("JSON schema written to {filename}".format(filename=filename))
 
 
+def construct_value(load, node):
+    # Handle nodes that start with '='
+    # See https://github.com/yaml/pyyaml/issues/89
+    if not isinstance(node, yaml.ScalarNode):
+        raise yaml.constructor.ConstructorError(
+            "while constructing a value",
+            node.start_mark,
+            "expected a scalar, but found %s" % node.id, node.start_mark
+        )
+    yield str(node.value)
 
 
 if __name__ == "__main__":
-  if len(sys.argv) == 0:
-      print("missing file")
+  if len(sys.argv) < 2:
+      print('Missing FILE parameter.\nUsage: %s [FILE]' % sys.argv[0])
       exit(1)
 
   for crdFile in sys.argv[1:]:
@@ -120,6 +133,7 @@ if __name__ == "__main__":
         f = open(crdFile)
       with f:
           defs = []
+          yaml.SafeLoader.add_constructor(u'tag:yaml.org,2002:value', construct_value)
           for y in yaml.load_all(f, Loader=yaml.SafeLoader):
               if y is None:
                   continue
@@ -141,6 +155,7 @@ if __name__ == "__main__":
                           filename = filename_format.format(
                               kind=y["spec"]["names"]["kind"],
                               group=y["spec"]["group"].split(".")[0],
+                              fullgroup=y["spec"]["group"],
                               version=version["name"],
                           ).lower() + ".json"
 
@@ -150,6 +165,7 @@ if __name__ == "__main__":
                           filename = filename_format.format(
                               kind=y["spec"]["names"]["kind"],
                               group=y["spec"]["group"].split(".")[0],
+                              fullgroup=y["spec"]["group"],
                               version=version["name"],
                           ).lower() + ".json"
 
@@ -159,6 +175,7 @@ if __name__ == "__main__":
                   filename = filename_format.format(
                       kind=y["spec"]["names"]["kind"],
                       group=y["spec"]["group"].split(".")[0],
+                      fullgroup=y["spec"]["group"],
                       version=y["spec"]["version"],
                   ).lower() + ".json"
 
