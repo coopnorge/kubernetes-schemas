@@ -19,5 +19,5 @@ docker docker run -v $(pwd):/src -it python-bats bash
 in the container run
 
 ```
- ./fetch-schemas.sh <dest>
+ ./fetch-schemas-api-platform.sh <dest>
 ```

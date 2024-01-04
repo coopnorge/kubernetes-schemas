@@ -2,7 +2,7 @@
 
 if [ -z "$1" ] ; then
   echo cluster folder as first argument required
-  echo example ./fetch-schemas.sh api-staging
+  echo example ./fetch-schemas.sh api-platform
   exit 1
 fi
 
