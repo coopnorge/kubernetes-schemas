@@ -1,2 +1,2 @@
-/CODEOWNERS @coopnorge/security-guild
-.github/workflows/security-* @coopnorge/security-guild
+/CODEOWNERS @coopnorge/cloud-security
+.github/workflows/security-* @coopnorge/cloud-security
