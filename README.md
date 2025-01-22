@@ -13,7 +13,7 @@ docker build -t python-bats .
 Then run 
 
 ```
-docker run -v $(pwd):/src -it python-bats bash
+docker run -v $(pwd):/src --workdir=/src -it python-bats bash
 ```
 
 in the container run
