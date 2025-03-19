@@ -7,10 +7,29 @@
       "type": "string"
     },
     "metadata": {
+      "properties": {
+        "name": {
+          "maxLength": 63,
+          "type": "string"
+        }
+      },
       "type": "object"
     },
     "spec": {
+      "description": "Parameters used to customise the underlying repository.",
       "properties": {
+        "actions": {
+          "default": {},
+          "description": "Workflow actions settings.",
+          "properties": {
+            "enableReusableWorkflowsForOrganizationAccess": {
+              "default": false,
+              "description": "Make workflow actions reusable in other repos in the organization. Defaults to false.",
+              "type": "boolean"
+            }
+          },
+          "type": "object"
+        },
         "archiveOnDestroy": {
           "default": true,
           "description": "Specifies if the repository should be archived when destroyed. Defaults to true",
@@ -63,28 +82,29 @@
                     "type": "boolean"
                   },
                   "requiredPullRequestReviews": {
+                    "default": {},
                     "description": "Enforce restrictions for pull request reviews.",
                     "properties": {
                       "requireCodeOwnerReviews": {
-                        "default": true,
+                        "default": false,
                         "description": "Require an approved review in pull requests including files with a designated code owner. Defaults to true.",
                         "type": "boolean"
                       },
                       "requireLastPushApproval": {
                         "default": false,
-                        "description": "Require that The most recent push must be approved by someone other than the last pusher.  Defaults to false",
+                        "description": "Require that The most recent push must be approved by someone other than the last pusher. Defaults to false",
                         "type": "boolean"
                       },
                       "requiredApprovingReviewCount": {
-                        "default": 1,
-                        "description": "Required number of approvals to satisfy branch protection requirements. If this is specified it must be a number between 0-6. Defaults to 1.",
+                        "default": 0,
+                        "description": "Required number of approvals to satisfy branch protection requirements. If this is specified it must be a number between 0-6. Defaults to 0.",
                         "type": "integer"
                       }
                     },
-                    "type": "object",
-                    "additionalProperties": false
+                    "type": "object"
                   },
                   "requiredStatusChecks": {
+                    "default": {},
                     "description": "Enforce restrictions for required status checks.",
                     "properties": {
                       "checks": {
@@ -95,27 +115,24 @@
                         "type": "array"
                       },
                       "strict": {
-                        "default": true,
-                        "description": "Require branches to be up to date before merging. Defaults to true.",
+                        "default": false,
+                        "description": "Require branches to be up to date before merging. Defaults to false.",
                         "type": "boolean"
                       }
                     },
-                    "type": "object",
-                    "additionalProperties": false
+                    "type": "object"
                   }
                 },
                 "required": [
                   "pattern",
                   "id"
                 ],
-                "type": "object",
-                "additionalProperties": false
+                "type": "object"
               },
               "type": "array"
             }
           },
-          "type": "object",
-          "additionalProperties": false
+          "type": "object"
         },
         "compositeDeletePolicy": {
           "default": "Background",
@@ -134,8 +151,7 @@
           "required": [
             "name"
           ],
-          "type": "object",
-          "additionalProperties": false
+          "type": "object"
         },
         "compositionRevisionRef": {
           "properties": {
@@ -146,8 +162,7 @@
           "required": [
             "name"
           ],
-          "type": "object",
-          "additionalProperties": false
+          "type": "object"
         },
         "compositionRevisionSelector": {
           "properties": {
@@ -161,8 +176,7 @@
           "required": [
             "matchLabels"
           ],
-          "type": "object",
-          "additionalProperties": false
+          "type": "object"
         },
         "compositionSelector": {
           "properties": {
@@ -176,11 +190,9 @@
           "required": [
             "matchLabels"
           ],
-          "type": "object",
-          "additionalProperties": false
+          "type": "object"
         },
         "compositionUpdatePolicy": {
-          "default": "Automatic",
           "enum": [
             "Automatic",
             "Manual"
@@ -229,15 +241,13 @@
               "required": [
                 "branch"
               ],
-              "type": "object",
-              "additionalProperties": false
+              "type": "object"
             }
           },
           "required": [
             "source"
           ],
-          "type": "object",
-          "additionalProperties": false
+          "type": "object"
         },
         "publishConnectionDetailsTo": {
           "properties": {
@@ -250,8 +260,7 @@
                   "type": "string"
                 }
               },
-              "type": "object",
-              "additionalProperties": false
+              "type": "object"
             },
             "metadata": {
               "properties": {
@@ -271,8 +280,7 @@
                   "type": "string"
                 }
               },
-              "type": "object",
-              "additionalProperties": false
+              "type": "object"
             },
             "name": {
               "type": "string"
@@ -281,10 +289,10 @@
           "required": [
             "name"
           ],
-          "type": "object",
-          "additionalProperties": false
+          "type": "object"
         },
         "pullRequests": {
+          "default": {},
           "description": "Pull Request settings.",
           "properties": {
             "allowAutoMerge": {
@@ -338,8 +346,7 @@
               "type": "string"
             }
           },
-          "type": "object",
-          "additionalProperties": false
+          "type": "object"
         },
         "resourceRef": {
           "properties": {
@@ -358,8 +365,7 @@
             "kind",
             "name"
           ],
-          "type": "object",
-          "additionalProperties": false
+          "type": "object"
         },
         "template": {
           "default": false,
@@ -391,15 +397,20 @@
           "required": [
             "name"
           ],
-          "type": "object",
-          "additionalProperties": false
+          "type": "object"
         }
       },
-      "type": "object",
-      "additionalProperties": false
+      "type": "object"
     },
     "status": {
       "properties": {
+        "claimConditionTypes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "x-kubernetes-list-type": "set"
+        },
         "conditions": {
           "description": "Conditions of the resource.",
           "items": {
@@ -427,10 +438,13 @@
               "status",
               "type"
             ],
-            "type": "object",
-            "additionalProperties": false
+            "type": "object"
           },
-          "type": "array"
+          "type": "array",
+          "x-kubernetes-list-map-keys": [
+            "type"
+          ],
+          "x-kubernetes-list-type": "map"
         },
         "connectionDetails": {
           "properties": {
@@ -439,12 +453,10 @@
               "type": "string"
             }
           },
-          "type": "object",
-          "additionalProperties": false
+          "type": "object"
         }
       },
-      "type": "object",
-      "additionalProperties": false
+      "type": "object"
     }
   },
   "required": [
