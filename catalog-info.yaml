@@ -1,10 +1,11 @@
+#nonk8s
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: kubernetes-schemas
   title: Kubernetes Schemas
   description: Manifest validation schemas for our kubernetes cluster APIs
-  lables:
+  tags:
     - "kubernetes"
   annotations:
     github.com/project-slug: coopnorge/kubernetes-schemas
