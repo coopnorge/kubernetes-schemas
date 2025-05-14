@@ -25,6 +25,8 @@ KEDA_VERSION=v2.16.1
 KEDA_SCALED_JOB_URL=https://raw.githubusercontent.com/kedacore/keda/${KEDA_VERSION}/config/crd/bases/keda.sh_scaledjobs.yaml
 KEDA_TRIGGER_AUTHENTICATION_URL=https://raw.githubusercontent.com/kedacore/keda/${KEDA_VERSION}/config/crd/bases/keda.sh_triggerauthentications.yaml
 
+GKE_SCHEMAS_OPENAPIV2=${PWD}/gke-schemas
+
 ### SETUP
 mkdir -p ${WORKDIR}
 rm -fr ${WORKDIR}/*
@@ -36,5 +38,8 @@ $SCHEMA_FETCH_SCRIPT $EXTERNAL_SECRET_MANAGER_URL
 $SCHEMA_FETCH_SCRIPT $OLD_EXTERNAL_SECRET_MANAGER_URL
 $SCHEMA_FETCH_SCRIPT $KEDA_SCALED_JOB_URL
 $SCHEMA_FETCH_SCRIPT $KEDA_TRIGGER_AUTHENTICATION_URL
+
+
+cp $GKE_SCHEMAS_OPENAPIV2/*.json ./
 
 popd
