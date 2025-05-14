@@ -27,6 +27,11 @@ KEDA_TRIGGER_AUTHENTICATION_URL=https://raw.githubusercontent.com/kedacore/keda/
 
 GKE_SCHEMAS_OPENAPIV2=${PWD}/gke-schemas
 
+# Elastic Cloud on Kubernetes (ECK) CRDs
+# https://github.com/elastic/cloud-on-k8s
+ECK_VERSION=v3.0.0
+ECK_ALL_CDRS_URL=https://raw.githubusercontent.com/elastic/cloud-on-k8s/refs/tags/${ECK_VERSION}/config/crds/v1/all-crds.yaml
+
 ### SETUP
 mkdir -p ${WORKDIR}
 rm -fr ${WORKDIR}/*
@@ -38,7 +43,7 @@ $SCHEMA_FETCH_SCRIPT $EXTERNAL_SECRET_MANAGER_URL
 $SCHEMA_FETCH_SCRIPT $OLD_EXTERNAL_SECRET_MANAGER_URL
 $SCHEMA_FETCH_SCRIPT $KEDA_SCALED_JOB_URL
 $SCHEMA_FETCH_SCRIPT $KEDA_TRIGGER_AUTHENTICATION_URL
-
+$SCHEMA_FETCH_SCRIPT $ECK_ALL_CDRS_URL
 
 cp $GKE_SCHEMAS_OPENAPIV2/*.json ./
 
