@@ -15,6 +15,7 @@ ISTIO_URL=https://raw.githubusercontent.com/istio/istio/${ISTIO_VERSION}/manifes
 
 EXTERNAL_SECRET_MANAGER_VERSION=v0.9.11
 EXTERNAL_SECRET_MANAGER_URL=https://raw.githubusercontent.com/external-secrets/external-secrets/${EXTERNAL_SECRET_MANAGER_VERSION}/config/crds/bases/external-secrets.io_externalsecrets.yaml
+EXTERNAL_SECRET_GENERATOR_PASSWORD_URL=https://raw.githubusercontent.com/external-secrets/external-secrets/${EXTERNAL_SECRET_MANAGER_VERSION}/config/crds/bases/generators.external-secrets.io_passwords.yaml
 
 OLD_EXTERNAL_SECRET_VERSION=8.5.5
 OLD_EXTERNAL_SECRET_MANAGER_URL=https://raw.githubusercontent.com/external-secrets/kubernetes-external-secrets/${OLD_EXTERNAL_SECRET_VERSION}/charts/kubernetes-external-secrets/crds/kubernetes-client.io_externalsecrets_crd.yaml
@@ -40,6 +41,7 @@ pushd ${WORKDIR}
 
 $SCHEMA_FETCH_SCRIPT $ISTIO_URL
 $SCHEMA_FETCH_SCRIPT $EXTERNAL_SECRET_MANAGER_URL
+$SCHEMA_FETCH_SCRIPT $EXTERNAL_SECRET_GENERATOR_PASSWORD_URL
 $SCHEMA_FETCH_SCRIPT $OLD_EXTERNAL_SECRET_MANAGER_URL
 $SCHEMA_FETCH_SCRIPT $KEDA_SCALED_JOB_URL
 $SCHEMA_FETCH_SCRIPT $KEDA_TRIGGER_AUTHENTICATION_URL
