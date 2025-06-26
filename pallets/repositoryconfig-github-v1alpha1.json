@@ -213,7 +213,7 @@
           "type": "boolean"
         },
         "pages": {
-          "description": "Settings for Github Pages.",
+          "description": "Settings for GitHub Pages.",
           "properties": {
             "cname": {
               "description": "The custom domain for the repository. This can only be set after the repository has been created.",
@@ -221,11 +221,12 @@
             },
             "enabled": {
               "default": false,
-              "description": "Enable Github Pages. Defaults to false.",
+              "description": "Enable GitHub Pages. Defaults to false.",
               "type": "boolean"
             },
             "source": {
-              "description": "The source branch and directory for the rendered Pages site.",
+              "deprecated": true,
+              "description": "The source branch and directory for the rendered Pages site. If this is specified, legacy build type will be used. **Deprecated**: omit `source` block and `workflow` build type will be used.",
               "properties": {
                 "branch": {
                   "default": "main",
@@ -244,9 +245,6 @@
               "type": "object"
             }
           },
-          "required": [
-            "source"
-          ],
           "type": "object"
         },
         "publishConnectionDetailsTo": {
