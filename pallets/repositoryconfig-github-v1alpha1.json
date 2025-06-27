@@ -225,7 +225,6 @@
               "type": "boolean"
             },
             "source": {
-              "deprecated": true,
               "description": "The source branch and directory for the rendered Pages site. If this is specified, legacy build type will be used. **Deprecated**: omit `source` block and `workflow` build type will be used.",
               "properties": {
                 "branch": {
