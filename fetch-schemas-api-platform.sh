@@ -33,6 +33,12 @@ GKE_SCHEMAS_OPENAPIV2=${PWD}/gke-schemas
 ECK_VERSION=v3.0.0
 ECK_ALL_CDRS_URL=https://raw.githubusercontent.com/elastic/cloud-on-k8s/refs/tags/${ECK_VERSION}/config/crds/v1/all-crds.yaml
 
+# ArgoCD CRDs (latest version v3.x)
+ARGOCD_VERSION=v3.0.12
+ARGOCD_APPLICATION_URL=https://raw.githubusercontent.com/argoproj/argo-cd/${ARGOCD_VERSION}/manifests/crds/application-crd.yaml
+ARGOCD_APPLICATION_SET_URL=https://raw.githubusercontent.com/argoproj/argo-cd/${ARGOCD_VERSION}/manifests/crds/applicationset-crd.yaml
+ARGOCD_APP_PROJECT_URL=https://raw.githubusercontent.com/argoproj/argo-cd/${ARGOCD_VERSION}/manifests/crds/appproject-crd.yaml
+
 ### SETUP
 mkdir -p ${WORKDIR}
 rm -fr ${WORKDIR}/*
@@ -46,6 +52,9 @@ $SCHEMA_FETCH_SCRIPT $OLD_EXTERNAL_SECRET_MANAGER_URL
 $SCHEMA_FETCH_SCRIPT $KEDA_SCALED_JOB_URL
 $SCHEMA_FETCH_SCRIPT $KEDA_TRIGGER_AUTHENTICATION_URL
 $SCHEMA_FETCH_SCRIPT $ECK_ALL_CDRS_URL
+$SCHEMA_FETCH_SCRIPT $ARGOCD_APPLICATION_URL
+$SCHEMA_FETCH_SCRIPT $ARGOCD_APPLICATION_SET_URL
+$SCHEMA_FETCH_SCRIPT $ARGOCD_APP_PROJECT_URL
 
 cp $GKE_SCHEMAS_OPENAPIV2/*.json ./
 
