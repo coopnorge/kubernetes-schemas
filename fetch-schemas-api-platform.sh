@@ -45,6 +45,11 @@ rm -fr ${WORKDIR}/*
 
 pushd ${WORKDIR}
 
+CRD_FILE=customresourcedefinition-apiextensions-v1.json
+if curl -fsSL "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/refs/heads/master/master/customresourcedefinition.json" -o "$CRD_FILE"; then
+  echo "Fetched CRD schema from for CustomResourceDefinition to $WORKDIR/$CRD_FILE"
+fi
+
 $SCHEMA_FETCH_SCRIPT $ISTIO_URL
 $SCHEMA_FETCH_SCRIPT $EXTERNAL_SECRET_MANAGER_URL
 $SCHEMA_FETCH_SCRIPT $EXTERNAL_SECRET_GENERATOR_PASSWORD_URL
