@@ -16,9 +16,11 @@
       "type": "object"
     },
     "spec": {
+      "additionalProperties": false,
       "description": "Parameters used to customise the underlying repository.",
       "properties": {
         "actions": {
+          "additionalProperties": false,
           "default": {},
           "description": "Workflow actions settings.",
           "properties": {
@@ -42,6 +44,7 @@
         },
         "branches": {
           "description": "Branch settings.",
+          "additionalProperties": false,
           "properties": {
             "default": {
               "default": "main",
@@ -51,6 +54,7 @@
             "protection": {
               "description": "A list of topics for the repository.",
               "items": {
+                "additionalProperties": false,
                 "properties": {
                   "enforceAdmins": {
                     "default": true,
@@ -84,6 +88,7 @@
                   "requiredPullRequestReviews": {
                     "default": {},
                     "description": "Enforce restrictions for pull request reviews.",
+                    "additionalProperties": false,
                     "properties": {
                       "requireCodeOwnerReviews": {
                         "default": false,
@@ -106,6 +111,7 @@
                   "requiredStatusChecks": {
                     "default": {},
                     "description": "Enforce restrictions for required status checks.",
+                    "additionalProperties": false,
                     "properties": {
                       "checks": {
                         "description": "The list of status checks to require in order to merge into this branch. No status checks are required by default.",
