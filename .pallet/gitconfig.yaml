@@ -17,3 +17,4 @@ spec:
             - "policy-bot: main"
         requiredPullRequestReviews:
           requireCodeOwnerReviews: true
+  visibility: public
