@@ -16,9 +16,11 @@
       "type": "object"
     },
     "spec": {
+      "additionalProperties": false,
       "description": "Parameters used to customise the underlying repository.",
       "properties": {
         "actions": {
+          "additionalProperties": false,
           "default": {},
           "description": "Workflow actions settings.",
           "properties": {
@@ -42,6 +44,7 @@
         },
         "branches": {
           "description": "Branch settings.",
+          "additionalProperties": false,
           "properties": {
             "default": {
               "default": "main",
@@ -51,6 +54,7 @@
             "protection": {
               "description": "A list of topics for the repository.",
               "items": {
+                "additionalProperties": false,
                 "properties": {
                   "enforceAdmins": {
                     "default": true,
@@ -82,6 +86,7 @@
                     "type": "boolean"
                   },
                   "requiredPullRequestReviews": {
+                    "additionalProperties": false,
                     "default": {},
                     "description": "Enforce restrictions for pull request reviews.",
                     "properties": {
@@ -104,6 +109,7 @@
                     "type": "object"
                   },
                   "requiredStatusChecks": {
+                    "additionalProperties": false,
                     "default": {},
                     "description": "Enforce restrictions for required status checks.",
                     "properties": {
