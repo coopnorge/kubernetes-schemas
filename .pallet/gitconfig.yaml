@@ -18,5 +18,5 @@ spec:
             - "build"
             - "policy-bot: main"
         requiredPullRequestReviews:
-          requireCodeOwnerReviews: true
+          requireCodeOwnerReviews: false
 
