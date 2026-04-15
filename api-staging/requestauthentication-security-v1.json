@@ -1,0 +1,170 @@
+{
+  "properties": {
+    "spec": {
+      "description": "RequestAuthentication defines what request authentication methods are supported by a workload.",
+      "properties": {
+        "jwtRules": {
+          "description": "Define the list of JWTs that can be validated at the selected workloads' proxy.",
+          "items": {
+            "properties": {
+              "audiences": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "forwardOriginalToken": {
+                "description": "If set to true, the original token will be kept for the upstream request.",
+                "type": "boolean"
+              },
+              "fromCookies": {
+                "description": "List of cookie names from which JWT is expected.",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "fromHeaders": {
+                "description": "List of header locations from which JWT is expected.",
+                "items": {
+                  "properties": {
+                    "name": {
+                      "description": "The HTTP header name.",
+                      "type": "string"
+                    },
+                    "prefix": {
+                      "description": "The prefix that should be stripped before decoding the token.",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object",
+                  "additionalProperties": false
+                },
+                "type": "array"
+              },
+              "fromParams": {
+                "description": "List of query parameters from which JWT is expected.",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "issuer": {
+                "description": "Identifies the issuer that issued the JWT.",
+                "type": "string"
+              },
+              "jwks": {
+                "description": "JSON Web Key Set of public keys to validate signature of the JWT.",
+                "type": "string"
+              },
+              "jwks_uri": {
+                "type": "string"
+              },
+              "jwksUri": {
+                "type": "string"
+              },
+              "outputClaimToHeaders": {
+                "description": "This field specifies a list of operations to copy the claim to HTTP headers on a successfully verified token.",
+                "items": {
+                  "properties": {
+                    "claim": {
+                      "description": "The name of the claim to be copied from.",
+                      "type": "string"
+                    },
+                    "header": {
+                      "description": "The name of the header to be created.",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object",
+                  "additionalProperties": false
+                },
+                "type": "array"
+              },
+              "outputPayloadToHeader": {
+                "type": "string"
+              },
+              "timeout": {
+                "description": "The maximum duration that the resolver will spend waiting for the JWKS to be fetched.",
+                "type": "string"
+              }
+            },
+            "type": "object",
+            "additionalProperties": false
+          },
+          "type": "array"
+        },
+        "selector": {
+          "description": "The selector determines the workloads to apply the RequestAuthentication on.",
+          "properties": {
+            "matchLabels": {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            }
+          },
+          "type": "object",
+          "additionalProperties": false
+        },
+        "targetRef": {
+          "description": "The targetRef specifies the resource the policy should be applied to.",
+          "properties": {
+            "group": {
+              "description": "group is the group of the target resource.",
+              "type": "string"
+            },
+            "kind": {
+              "description": "kind is kind of the target resource.",
+              "type": "string"
+            },
+            "name": {
+              "description": "name is the name of the target resource.",
+              "type": "string"
+            },
+            "namespace": {
+              "description": "namespace is the namespace of the referent.",
+              "type": "string"
+            }
+          },
+          "type": "object",
+          "additionalProperties": false
+        },
+        "targetRefs": {
+          "description": "The targetRefs specifies a list of resources the policy should be applied to.",
+          "items": {
+            "properties": {
+              "group": {
+                "description": "group is the group of the target resource.",
+                "type": "string"
+              },
+              "kind": {
+                "description": "kind is kind of the target resource.",
+                "type": "string"
+              },
+              "name": {
+                "description": "name is the name of the target resource.",
+                "type": "string"
+              },
+              "namespace": {
+                "description": "namespace is the namespace of the referent.",
+                "type": "string"
+              }
+            },
+            "type": "object",
+            "additionalProperties": false
+          },
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "additionalProperties": false
+    },
+    "status": {
+      "type": "object",
+      "x-kubernetes-preserve-unknown-fields": true
+    }
+  },
+  "type": "object"
+}
+
