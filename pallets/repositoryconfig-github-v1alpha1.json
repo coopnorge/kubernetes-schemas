@@ -16,11 +16,9 @@
       "type": "object"
     },
     "spec": {
-      "additionalProperties": false,
       "description": "Parameters used to customise the underlying repository.",
       "properties": {
         "actions": {
-          "additionalProperties": false,
           "default": {},
           "description": "Workflow actions settings.",
           "properties": {
@@ -37,14 +35,8 @@
           "description": "Specifies if the repository should be archived when destroyed. Defaults to true",
           "type": "boolean"
         },
-        "archived": {
-          "default": false,
-          "description": "Specifies if the repository should be archived. NOTE Currently, the API does not support unarchiving. Defaults to false.",
-          "type": "boolean"
-        },
         "branches": {
           "description": "Branch settings.",
-          "additionalProperties": false,
           "properties": {
             "default": {
               "default": "main",
@@ -54,7 +46,6 @@
             "protection": {
               "description": "A list of topics for the repository.",
               "items": {
-                "additionalProperties": false,
                 "properties": {
                   "enforceAdmins": {
                     "default": true,
@@ -86,7 +77,6 @@
                     "type": "boolean"
                   },
                   "requiredPullRequestReviews": {
-                    "additionalProperties": false,
                     "default": {},
                     "description": "Enforce restrictions for pull request reviews.",
                     "properties": {
@@ -109,7 +99,6 @@
                     "type": "object"
                   },
                   "requiredStatusChecks": {
-                    "additionalProperties": false,
                     "default": {},
                     "description": "Enforce restrictions for required status checks.",
                     "properties": {
@@ -221,6 +210,15 @@
         "pages": {
           "description": "Settings for GitHub Pages.",
           "properties": {
+            "buildType": {
+              "default": "workflow",
+              "description": "Which build type to use for building the pages. Defaults to 'workflow'. Allows also setting it to 'legacy'. Note that legacy will be deprecated.",
+              "enum": [
+                "workflow",
+                "legacy"
+              ],
+              "type": "string"
+            },
             "cname": {
               "description": "The custom domain for the repository. This can only be set after the repository has been created.",
               "type": "string"
