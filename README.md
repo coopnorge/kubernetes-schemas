@@ -3,7 +3,7 @@
 Here we can host schemas of the api's in our kubernetes clusters. This is useful 
 for validating manifests.
 
-To update the schema's, check if the schemas are defined in `fetch-schemas.sh`.
+To update the schema's, check if the schemas are defined in `fetch-schemas-api-platform.sh`.
 Then build the docker image:
 
 ```
@@ -21,6 +21,3 @@ in the container run
 ```
 ./fetch-schemas-api-platform.sh <dest>
 ```
-
-#####
-testing testing
