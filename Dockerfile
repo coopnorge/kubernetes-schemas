@@ -1,4 +1,4 @@
-FROM python:3.9.7-alpine3.14
+FROM python:3.14.6-alpine3.24
 RUN apk --no-cache add bats curl
 COPY requirements.txt /code/
 RUN pip install -r /code/requirements.txt
