@@ -22,7 +22,7 @@ OLD_EXTERNAL_SECRET_MANAGER_URL=https://raw.githubusercontent.com/external-secre
 
 echo $OLD_EXTERNAL_SECRET_MANAGER_URL
 
-KEDA_VERSION=v2.16.1
+KEDA_VERSION=v2.20.1
 KEDA_SCALED_JOB_URL=https://raw.githubusercontent.com/kedacore/keda/${KEDA_VERSION}/config/crd/bases/keda.sh_scaledjobs.yaml
 KEDA_SCALED_OBJECT_URL=https://raw.githubusercontent.com/kedacore/keda/${KEDA_VERSION}/config/crd/bases/keda.sh_scaledobjects.yaml
 KEDA_TRIGGER_AUTHENTICATION_URL=https://raw.githubusercontent.com/kedacore/keda/${KEDA_VERSION}/config/crd/bases/keda.sh_triggerauthentications.yaml
@@ -38,7 +38,7 @@ ECK_ALL_CDRS_URL=https://raw.githubusercontent.com/elastic/cloud-on-k8s/refs/tag
 DATADOG_OPERATOR_CRDS_URL=https://raw.githubusercontent.com/DataDog/helm-charts/main/crds/datadoghq.com_datadogmonitors.yaml
 
 # ArgoCD CRDs (latest version v3.x)
-ARGOCD_VERSION=v3.0.12
+ARGOCD_VERSION=v3.4.5
 ARGOCD_APPLICATION_URL=https://raw.githubusercontent.com/argoproj/argo-cd/${ARGOCD_VERSION}/manifests/crds/application-crd.yaml
 ARGOCD_APPLICATION_SET_URL=https://raw.githubusercontent.com/argoproj/argo-cd/${ARGOCD_VERSION}/manifests/crds/applicationset-crd.yaml
 ARGOCD_APP_PROJECT_URL=https://raw.githubusercontent.com/argoproj/argo-cd/${ARGOCD_VERSION}/manifests/crds/appproject-crd.yaml
