@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-if [ -z "$1" ] ; then
-  echo cluster folder as first argument required
-  echo example ./fetch-schemas.sh api-platform
-  exit 1
+if [ -z "$1" ]; then
+	echo cluster folder as first argument required
+	echo example ./fetch-schemas.sh api-platform
+	exit 1
 fi
 
 SCHEMA_FETCH_SCRIPT=${PWD}/openapi2jsonschema.py
@@ -43,6 +43,14 @@ ARGOCD_APPLICATION_URL=https://raw.githubusercontent.com/argoproj/argo-cd/${ARGO
 ARGOCD_APPLICATION_SET_URL=https://raw.githubusercontent.com/argoproj/argo-cd/${ARGOCD_VERSION}/manifests/crds/applicationset-crd.yaml
 ARGOCD_APP_PROJECT_URL=https://raw.githubusercontent.com/argoproj/argo-cd/${ARGOCD_VERSION}/manifests/crds/appproject-crd.yaml
 
+# Cert Manager
+CERTMANAGER_IO_CHALLENGE=https://github.com/cert-manager/cert-manager/raw/refs/heads/master/deploy/crds/acme.cert-manager.io_challenges.yaml
+CERTMANAGER_IO_ORDERS=https://github.com/cert-manager/cert-manager/raw/refs/heads/master/deploy/crds/acme.cert-manager.io_orders.yaml
+CERTMANAGER_CERTIFICATEREQUESTS=https://github.com/cert-manager/cert-manager/raw/refs/heads/master/deploy/crds/cert-manager.io_certificaterequests.yaml
+CERTMANAGER_CERTIFICATES=https://github.com/cert-manager/cert-manager/raw/refs/heads/master/deploy/crds/cert-manager.io_certificates.yaml
+CERTMANAGER_CLUSTERISSUERS=https://github.com/cert-manager/cert-manager/raw/refs/heads/master/deploy/crds/cert-manager.io_clusterissuers.yaml
+CERTMANAGER_ISSUERS=https://github.com/cert-manager/cert-manager/raw/refs/heads/master/deploy/crds/cert-manager.io_issuers.yaml
+
 ### SETUP
 mkdir -p ${WORKDIR}
 rm -fr ${WORKDIR}/*
@@ -51,7 +59,7 @@ pushd ${WORKDIR}
 
 CRD_FILE=customresourcedefinition-apiextensions-v1.json
 if curl -fsSL "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/refs/heads/master/master/customresourcedefinition.json" -o "$CRD_FILE"; then
-  echo "Fetched CRD schema from for CustomResourceDefinition to $WORKDIR/$CRD_FILE"
+	echo "Fetched CRD schema from for CustomResourceDefinition to $WORKDIR/$CRD_FILE"
 fi
 
 $SCHEMA_FETCH_SCRIPT $ISTIO_URL
@@ -66,6 +74,12 @@ $SCHEMA_FETCH_SCRIPT $ARGOCD_APPLICATION_URL
 $SCHEMA_FETCH_SCRIPT $ARGOCD_APPLICATION_SET_URL
 $SCHEMA_FETCH_SCRIPT $ARGOCD_APP_PROJECT_URL
 $SCHEMA_FETCH_SCRIPT $DATADOG_OPERATOR_CRDS_URL
+$SCHEMA_FETCH_SCRIPT $CERTMANAGER_IO_CHALLENGE
+$SCHEMA_FETCH_SCRIPT $CERTMANAGER_IO_ORDERS
+$SCHEMA_FETCH_SCRIPT $CERTMANAGER_CERTIFICATEREQUESTS
+$SCHEMA_FETCH_SCRIPT $CERTMANAGER_CERTIFICATES
+$SCHEMA_FETCH_SCRIPT $CERTMANAGER_CLUSTERISSUERS
+$SCHEMA_FETCH_SCRIPT $CERTMANAGER_ISSUERS
 
 cp $GKE_SCHEMAS_OPENAPIV2/*.json ./
 
