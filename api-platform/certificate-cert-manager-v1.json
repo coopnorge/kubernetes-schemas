@@ -348,6 +348,8 @@
         "renewBeforePercentage": {
           "description": "`renewBeforePercentage` is like `renewBefore`, except it is a relative percentage\nrather than an absolute duration. For example, if a certificate is valid for 60\nminutes, and  `renewBeforePercentage=25`, cert-manager will begin to attempt to\nrenew the certificate 45 minutes after it was issued (i.e. when there are 15\nminutes (25%) remaining until the certificate is no longer valid).\n\nNOTE: The actual lifetime of the issued certificate is used to determine the\nrenewal time. If an issuer returns a certificate with a different lifetime than\nthe one requested, cert-manager will use the lifetime of the issued certificate.\n\nValue must be an integer in the range (0,100). The minimum effective\n`renewBefore` derived from the `renewBeforePercentage` and `duration` fields is 5\nminutes.\nCannot be set if the `renewBefore` field is set.",
           "format": "int32",
+          "maximum": 99,
+          "minimum": 1,
           "type": "integer"
         },
         "renewal": {
@@ -565,6 +567,10 @@
             "ari": {
               "description": "ARI stores the ACME Renewal Information that is fetched from the ACME server\nin accordance with RFC 9773. This is only populated if the ARI feature gate is enabled.",
               "properties": {
+                "certID": {
+                  "description": "CertID is the ARI CertID (RFC 9773) of the certificate this renewal information was\nfetched for. This is used to determine if we need to re-fetch the renewal information\nas changed cert id means that ARI fetched before is stale.",
+                  "type": "string"
+                },
                 "explanationURL": {
                   "description": "ExplanationURL is a human-readable URL that may explain why the suggested window\nhas its current value.",
                   "type": "string"
