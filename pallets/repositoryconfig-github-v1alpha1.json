@@ -207,6 +207,9 @@
           "description": "Enable the GitHub Issues features on the repository. Defaults to true.",
           "type": "boolean"
         },
+        "owner": {
+          "type": "string"
+        },
         "pages": {
           "description": "Settings for GitHub Pages.",
           "properties": {
