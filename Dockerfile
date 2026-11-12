@@ -1,4 +1,4 @@
-FROM python:3.14.6-alpine3.24@sha256:26730869004e2b9c4b9ad09cab8625e81d256d1ce97e72df5520e806b1709f92
+FROM python:3.15.1-alpine3.24@sha256:54448f67d7c31c39e5cdd3ea2d6382395ce142806c284425f8e897d78a0465b3
 RUN apk --no-cache add bats curl
 COPY requirements.txt /code/
 RUN pip install -r /code/requirements.txt
